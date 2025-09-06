@@ -1,15 +1,20 @@
-# Key Locker - Environment Setup Complete
+# Key Locker - Flask Security Testing Application
 
-## Environment Details
-- Python: 3.x.x
-- Flask: 3.0.0
-- VS Code: Latest
-- Git: 2.x.x
+A secure credential management system built with Flask for security testing and educational purposes.
 
-## Quick Start
-1. Activate virtual environment: `venv\Scripts\activate`
-2. Run application: `python app.py`
-3. Open browser: `http://localhost:5000`
+## Features
+- User authentication with password hashing
+- Secure session management  
+- JSON-based data storage
+- User data isolation
 
-## Setup Date
-[Current Date]
+## Setup
+1. Clone repository
+2. Create virtual environment
+3. Install dependencies: `pip install -r requirements.txt`
+4. Run application: `python app.py`
+
+## Status
+✅ Phase 1: Environment Setup - Complete
+✅ Phase 2: Project Structure - Complete  
+✅ Phase 3: GitHub Integration - Complete
