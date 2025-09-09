@@ -27,7 +27,7 @@ def get_json(filename):
 # Define index route (used in logout redirect)
 @app.route('/')
 def index():
-    return '<h1>Welcome to Key Locker</h1><p><a href="/login">Login</a> | <a href="/register">Register</a></p>'
+    return render_template('index.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
