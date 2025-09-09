@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Key Locker{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="text-center">Create Account</h3>
+      </div>
+      <div class="card-body">
+        <form method="POST" id="registerForm">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text"
+                  class="form-control"
+                  id="username"
+                  name="username"
+                  required>
+            <div class="form-text">Choose a unique username for your account.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  required>
+            <div class="password-strength" id="password-strength"></div>
+          </div>
+
+          <div class="mb-3">
+            <label for="confirm_password" class="form-label">Confirm Password</label>
+            <input type="password"
+                  class="form-control"
+                  id="confirm_password"
+                  name="confirm_password"
+                  required>
+            <div id="password-feedback" class="mt-2"></div>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit"
+                    class="btn btn-primary"
+                    id="registerBtn"
+                    disabled>
+              Register
+            </button>
+          </div>
+        </form>
+        <div class="text-center mt-3">
+          <p>Already have an account?
+            <a href="{{ url_for('login') }}">Login here</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const pwd = document.getElementById('password');
+  const cpwd = document.getElementById('confirm_password');
+  const strengthBar = document.getElementById('password-strength');
+  const feedback = document.getElementById('password-feedback');
+  const btn = document.getElementById('registerBtn');
+
+  function updateStrength() {
+    const val = pwd.value;
+    let score = 0;
+    if (val.length >= 6) score++;
+    if (/[A-Z]/.test(val)) score++;
+    if (/[0-9]/.test(val)) score++;
+    if (/[^A-Za-z0-9]/.test(val)) score++;
+
+    strengthBar.className = 'password-strength';
+    if (score <= 1) strengthBar.classList.add('weak');
+    else if (score <= 3) strengthBar.classList.add('medium');
+    else strengthBar.classList.add('strong');
+  }
+
+  function validateConfirm() {
+    const p = pwd.value;
+    const c = cpwd.value;
+    pwd.classList.remove('is-valid','is-invalid');
+    cpwd.classList.remove('is-valid','is-invalid');
+    feedback.textContent = '';
+    btn.disabled = true;
+
+    if (p.length < 6) {
+      pwd.classList.add('is-invalid');
+      feedback.innerHTML = '<small class="text-danger">Password must be at least 6 characters.</small>';
+      return;
+    }
+    pwd.classList.add('is-valid');
+
+    if (!c) return;
+    if (p === c) {
+      cpwd.classList.add('is-valid');
+      feedback.innerHTML = '<small class="text-success">Passwords match!</small>';
+      btn.disabled = false;
+    } else {
+      cpwd.classList.add('is-invalid');
+      feedback.innerHTML = '<small class="text-danger">Passwords do not match.</small>';
+    }
+  }
+
+  pwd.addEventListener('input', () => {
+    updateStrength();
+    validateConfirm();
+  });
+  cpwd.addEventListener('input', validateConfirm);
+
+  document.getElementById('registerForm').addEventListener('submit', e => {
+    if (pwd.value !== cpwd.value || pwd.value.length < 6) {
+      e.preventDefault();
+      alert('Please correct password fields.');
+    }
+  });
+});
+</script>
+{% endblock %}

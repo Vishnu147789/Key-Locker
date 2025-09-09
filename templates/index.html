@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome - Key Locker{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+    <div class="col-lg-9">
+
+        <div class="card shadow-lg border-0 mb-4">
+        <div class="card-header text-center bg-primary text-white rounded-top">
+            <h2 class="mb-1">🔒 Key Locker</h2>
+            <h5 class="mb-0">Secure Credential Management System</h5>
+        </div>
+        <div class="card-body bg-dark text-light">
+            <div class="mb-4">
+            <h4 class="text-info mb-2">About Key Locker</h4>
+            <p>
+                <strong>Key Locker</strong> is a Flask-powered web app designed to help you securely store and manage your sensitive credentials such as passwords, API keys, tokens, and secrets.<br>
+                <span class="text-muted">Built for security, usability, and productivity.</span>
+            </p>
+            <ul>
+                <li>🔐 <b>Strong Protection</b>: Password hashing and session isolation</li>
+                <li>🗝️ <b>Easy Key Management</b>: Add, delete, and review secrets quickly</li>
+                <li>👤 <b>User Privacy</b>: Only you can access your stored credentials</li>
+                <li>📋 <b>Productivity Tools</b>: Copy, describe, and organize your keys</li>
+                <li>💡 <b>Educational Purpose</b>: Designed for secure coding, demos, and learning</li>
+            </ul>
+            </div>
+            
+            {% if not session.username %}
+            <div class="text-center mb-4">
+            <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg me-2">Login</a>
+            <a href="{{ url_for('register') }}" class="btn btn-outline-light btn-lg">Register</a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="card-footer text-center bg-secondary text-light rounded-bottom">
+            <small>&copy; 2025 Key Locker &mdash; Secure Credential Management <br>
+            <span class="text-info">Version 1.0 | Flask & Bootstrap 5</span></small>
+        </div>
+        </div>
+
+        <div class="row mt-4">
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 text-center bg-dark text-light feature-card">
+            <div class="card-body">
+                <h5 class="card-title">🔐 Secure Storage</h5>
+                <p class="card-text">Your credentials are protected with industry-standard password hashing and isolation.</p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 text-center bg-dark text-light feature-card">
+            <div class="card-body">
+                <h5 class="card-title">👤 User Isolation</h5>
+                <p class="card-text">Each user's data is completely isolated and private.</p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 text-center bg-dark text-light feature-card">
+            <div class="card-body">
+                <h5 class="card-title">🎯 Easy Management</h5>
+                <p class="card-text">Add, view, copy and manage your keys with an intuitive UI.</p>
+            </div>
+            </div>
+        </div>
+        </div>
+
+    </div>
+    </div>
+</div>
+{% endblock %}
